@@ -9,7 +9,7 @@ const fetcher = async (url) => {
   const data = await res.json();
 
   if (res.status !== 200) {
-    throw new Error(data.message);
+    throw new Error(data?.message);
   }
   return data;
 };
@@ -29,6 +29,10 @@ export default function Fighter() {
     ({ trait_type }) => trait_type === 'Level'
   );
 
+  const characterAttr = data.attributes.find(
+    ({ trait_type }) => trait_type === 'Character'
+  );
+
   const combatEntries = data?.chronicle?.map(
     ({ combat_entries }) => combat_entries
   );
@@ -37,9 +41,25 @@ export default function Fighter() {
   console.log('ownCombatEntries', ownCombatEntries);
 
   return (
-    <div style={{ display: 'grid' }}>
+    <div
+      style={{
+        display: 'grid',
+        justifyContent: 'center',
+        alignContent: 'center',
+      }}
+    >
       <img src={data?.image} width={260} height={260} />
-      <h1>Level: {levelAttr?.value}</h1>
+      <div>
+        <div style={{ display: 'flex' }}>
+          <h1 style={{ margin: 0, marginBottom: 6 }}>
+            {characterAttr?.value} #{data?.id}
+          </h1>
+        </div>
+        <h2 style={{ margin: 0, marginBottom: 20 }}>
+          Level: {levelAttr?.value}
+        </h2>
+      </div>
+
       <div style={{ display: 'grid', gridGap: 12 }}>
         {ownCombatEntries.map(({ attack, owner }, index) => (
           <div key={uuid()} style={{ display: 'flex', gap: 12 }}>
