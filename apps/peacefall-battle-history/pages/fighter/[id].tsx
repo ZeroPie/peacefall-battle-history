@@ -43,7 +43,7 @@ export default function Fighter() {
       <div style={{ display: 'grid', gridGap: 12 }}>
         {ownCombatEntries.map(({ attack, owner }, index) => (
           <div key={uuid()} style={{ display: 'flex', gap: 12 }}>
-            Round: {index + 1}
+            Round {index + 1}:
             <Image
               src={`/syndicate.${attack?.toLowerCase()}.png`}
               width={20}

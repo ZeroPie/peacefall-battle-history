@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import useSwr from 'swr';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export function Index({ fighter }) {
-  console.log('fighter', fighter);
+  const [fighterId, setFighterId] = useState(0);
   const router = useRouter();
-  const fighterId = router?.query?.id || '1';
+
   return (
     <div
       style={{
@@ -16,7 +17,27 @@ export function Index({ fighter }) {
         gridTemplateRows: 'auto 1fr auto',
       }}
     >
-      <div className="container">lalal</div>
+      <div className="container">
+        Fighter Id
+        <form
+          onSubmit={(ev) => {
+            ev.preventDefault();
+            router.push(`/fighter/${fighterId}`);
+          }}
+        >
+          <input
+            type="tel"
+            maxLength={4}
+            max="8192"
+            onChange={(e) => {
+              const fighterId = Number.parseInt(e.target.value);
+              if (fighterId <= 8192) {
+                setFighterId(fighterId);
+              }
+            }}
+          />
+        </form>
+      </div>
     </div>
   );
 }
