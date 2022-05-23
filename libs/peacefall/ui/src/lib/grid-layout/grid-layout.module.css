@@ -1,0 +1,6 @@
+ .container {
+     display: grid;
+     min-height: 100vh;
+     margin: 0;
+     grid-template-rows: auto 1fr auto;
+}

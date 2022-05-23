@@ -9,24 +9,24 @@ export function Index({ fighter }) {
   const router = useRouter();
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        minHeight: '100vh',
-        margin: 0,
-        gridTemplateRows: 'auto 1fr auto',
-      }}
-    >
-      <div className="container">
-        Fighter Id
-        <form
-          onSubmit={(ev) => {
-            ev.preventDefault();
-            router.push(`/fighter/${fighterId}`);
+    <div style={{ display: 'flex', justifyContent: 'center', padding: 24 }}>
+      <form
+        onSubmit={(ev) => {
+          ev.preventDefault();
+          router.push(`/fighter/${fighterId}`);
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
+          <label htmlFor="figtherId">Fighter Id</label>
           <input
+            id="figtherId"
             type="tel"
+            style={{ border: '1px solid white', height: 28 }}
             maxLength={4}
             max="8192"
             onChange={(e) => {
@@ -36,8 +36,8 @@ export function Index({ fighter }) {
               }
             }}
           />
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }

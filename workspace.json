@@ -3,6 +3,8 @@
   "version": 2,
   "projects": {
     "peacefall-battle-history": "apps/peacefall-battle-history",
-    "peacefall-battle-history-e2e": "apps/peacefall-battle-history-e2e"
+    "peacefall-battle-history-e2e": "apps/peacefall-battle-history-e2e",
+    "peacefall-ui": "libs/peacefall/ui",
+    "peacefall-ui-e2e": "apps/peacefall-ui-e2e"
   }
 }
