@@ -11,10 +11,12 @@ export const globalStyles = globalCss({
   h1: {
     fontWeight: '$bold',
     fontSize: '$24',
+    margin: 0,
   },
   h2: {
     fontWeight: '$bold',
     fontSize: '$20',
+    margin: 0,
   },
   body: {
     margin: 0,
