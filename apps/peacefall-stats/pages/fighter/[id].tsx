@@ -6,10 +6,11 @@ import Link from 'next/link';
 
 const fetcher = async (url) => {
   const res = await fetch(url);
-  const data = await res.json();
+  const data = res.json();
 
-  if (res.status !== 200) {
-    throw new Error(data?.message);
+  if (!res.ok) {
+    const error = { message: res.statusText };
+    throw error;
   }
   return data;
 };
@@ -21,10 +22,9 @@ export default function Fighter() {
     fetcher
   );
 
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div>{error?.message}</div>;
   if (!data) return <div>Loading...</div>;
 
-  console.log('data', data);
   const levelAttr = data.attributes.find(
     ({ trait_type }) => trait_type === 'Level'
   );
@@ -41,13 +41,15 @@ export default function Fighter() {
     ({ combat_entries }) => combat_entries
   );
 
+  const peaceAttr = data.attributes.find(
+    ({ trait_type }) => trait_type === 'Peace'
+  );
+
   const ownCombatEntries = combatEntries?.map((entry) => entry[1]);
 
   const opponentCombatEntries = combatEntries?.map((entry) => entry[0]);
 
   const ownSyndicate = syndicateAttr?.value;
-
-  console.log('data', data);
 
   return (
     <div
@@ -75,7 +77,10 @@ export default function Fighter() {
           justifyContent: 'space-between',
         }}
       >
-        <h2>Level {levelAttr?.value}</h2>
+        <h2>
+          Level {levelAttr?.value} {peaceAttr ? `☮️` : `⚔️`}
+        </h2>
+
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Image
             src={`/syndicate.${ownSyndicate.toLowerCase()}.png`}
@@ -125,15 +130,4 @@ export default function Fighter() {
       </div>
     </div>
   );
-}
-
-{
-  /* <img
-        src={`https://challengers.peacefall.xyz/${data?.id}/${
-          levelAttr?.value - 1
-        }.gif`}
-        width={300}
-        height={300}
-      />
- */
 }

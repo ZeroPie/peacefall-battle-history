@@ -1,10 +1,10 @@
-import styles from './header.module.css';
+import * as S from './header.styles';
 
 /* eslint-disable-next-line */
 export interface HeaderProps {}
 
 export function Header(props: HeaderProps) {
-  return <div className={styles['header']}></div>;
+  return <S.Header />;
 }
 
 export default Header;

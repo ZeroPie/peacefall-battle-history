@@ -20,7 +20,6 @@ export default async function fighterHandler(
       } catch (error) {
         res.status(400).json({ error });
       }
-
       break;
     default:
       res.setHeader('Allow', ['GET']);

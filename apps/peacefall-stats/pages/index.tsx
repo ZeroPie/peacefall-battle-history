@@ -1,6 +1,6 @@
+import { Input } from '@peacefall-ui';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import useSwr from 'swr';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -23,15 +23,17 @@ export function Index({ fighter }) {
           }}
         >
           <label htmlFor="figtherId">Fighter Id</label>
-          <input
+
+          <Input
             id="figtherId"
-            type="tel"
-            style={{ border: '1px solid white', height: 28 }}
+            type="number"
+            min={0}
             maxLength={4}
-            max="8192"
+            max={8191}
+            value={fighterId}
             onChange={(e) => {
-              const fighterId = Number.parseInt(e.target.value);
-              if (fighterId <= 8192) {
+              if (e.target.value.length <= 4) {
+                const fighterId = Number.parseInt(e.target.value);
                 setFighterId(fighterId);
               }
             }}

@@ -1,7 +1,7 @@
 import type * as Stitches from '@stitches/react';
 import { createStitches } from '@stitches/react';
+import { slate, gray } from '@radix-ui/colors';
 
-export { Stitches };
 export const {
   styled,
   css,
@@ -14,9 +14,11 @@ export const {
   prefix: 'stitches',
   theme: {
     colors: {
-      primary: '#000000',
-      secondary: '#fff',
-      background: '#000000',
+      ...slate,
+      ...gray,
+      background: 'black',
+      primary: '$gray1',
+      secondary: '$gray11',
     },
     space: {
       0: '0px',

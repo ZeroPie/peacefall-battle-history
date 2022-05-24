@@ -1,17 +1,17 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/peacefall-battle-history-e2e/src",
+  "sourceRoot": "apps/peacefall-stats-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/peacefall-battle-history-e2e/cypress.json",
-        "devServerTarget": "peacefall-battle-history:serve:development"
+        "cypressConfig": "apps/peacefall-stats-e2e/cypress.json",
+        "devServerTarget": "peacefall-stats:serve:development"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "peacefall-battle-history:serve:production"
+          "devServerTarget": "peacefall-stats:serve:production"
         }
       }
     },
@@ -19,10 +19,10 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/peacefall-battle-history-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/peacefall-stats-e2e/**/*.{js,ts}"]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["peacefall-battle-history"]
+  "implicitDependencies": ["peacefall-stats"]
 }
