@@ -78,7 +78,7 @@ export default function Fighter() {
         }}
       >
         <h2>
-          Level {levelAttr?.value} {peaceAttr ? `☮️` : `⚔️`}
+          Level {levelAttr?.value} {peaceAttr?.value === 'Yes' ? `☮️` : `⚔️`}
         </h2>
 
         <div style={{ display: 'flex', alignItems: 'center' }}>
