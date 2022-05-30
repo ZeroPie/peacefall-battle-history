@@ -119,11 +119,7 @@ export default function Fighter() {
               />
               {`${owner.slice(0, 6)}...`}
               <Link href={`https://opensea.io/${owner}`}>OS</Link>
-              <Link
-                href={`https://peacefall.xyz/api/rankings/totalOwned?address=${owner}`}
-              >
-                Fighters
-              </Link>
+              <Link href={`/boss`}>Boss</Link>
             </div>
           );
         })}

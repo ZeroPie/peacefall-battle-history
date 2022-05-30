@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function fighterHandler(
+export default async function addressHandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const {
-    query: { address },
+    query: { id },
     method,
   } = req;
 
@@ -13,10 +13,21 @@ export default async function fighterHandler(
     case 'GET':
       try {
         const response = await fetch(
-          `https://peacefall.xyz/api/rankings/totalOwned?address=${address}`
+          `https://peacefall.xyz/api/rankings/totalOwned?address=${id}`
         );
-        const fighter = await response.json();
-        res.status(200).json({ address, ...fighter });
+        const { data } = await response.json();
+
+        console.log('data', data);
+        const fetches = data.map(({ warrior_id }) =>
+          fetch(`https://challengers.peacefall.xyz/${warrior_id}.json`)
+        );
+
+        const responses = await Promise.all([...fetches]);
+        const fighters = await Promise.all(responses.map((r) => r.json()));
+
+        console.log('fighters', fighters);
+
+        res.status(200).json(fighters);
       } catch (error) {
         res.status(400).json({ error });
       }
