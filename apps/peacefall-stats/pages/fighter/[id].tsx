@@ -119,7 +119,7 @@ export default function Fighter() {
               />
               {`${owner.slice(0, 6)}...`}
               <Link href={`https://opensea.io/${owner}`}>OS</Link>
-              <Link href={`/boss`}>Boss</Link>
+              <Link href={`/boss/${owner}`}>Boss</Link>
             </div>
           );
         })}
