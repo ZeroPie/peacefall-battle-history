@@ -4,7 +4,6 @@ export const globalStyles = globalCss({
   '*': {
     boxSizing: 'border-box',
     fontWeight: '$light',
-    background: '$background',
     fontSize: '$16',
     color: '$secondary',
   },
@@ -22,6 +21,7 @@ export const globalStyles = globalCss({
     margin: 0,
     padding: 0,
     minHeight: '100%',
+    background: '$background',
   },
   'html, #__next': { height: 'inherit', width: '100vw' },
   a: { all: 'unset' },
