@@ -113,7 +113,7 @@ export default function Fighter() {
       <div style={{ display: 'grid', gridGap: 12 }}>
         {ownCombatEntries.map(({ attack, owner, warrior }, index) => {
           const victor = data?.chronicle[index]?.victor;
-          const isVictor = victor === warrior?.id;
+          const isVictor = victor === data?.id;
           const round = data?.chronicle[index]?.round;
           const ownAttack = attack || ownSyndicate;
           const opponentOwner = opponentCombatEntries[index]?.owner;
