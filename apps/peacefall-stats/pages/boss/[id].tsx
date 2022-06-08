@@ -17,14 +17,17 @@ const fetcher = async (url) => {
 
 const Boss = () => {
   const { query } = useRouter();
-  console.log('query', query);
-  const { data: warriors = [], error } = useSWR(
+
+  const { data: warriors, error } = useSWR(
     () => query.id && `/api/address/${query?.id}`,
     fetcher
   );
-  if (!warriors) return <div>Loading...</div>;
 
-  console.log('warriors', warriors);
+  if (error) return <div>{error?.message}</div>;
+  if (!warriors) return <div>Loading...</div>;
+  if (warriors.length === 0)
+    return <div>{`No warriors found for ${query?.id}`}</div>;
+
   return (
     <div
       style={{
@@ -33,7 +36,6 @@ const Boss = () => {
         gridTemplateColumns: 'repeat( auto-fit, minmax(250px, 1fr)',
       }}
     >
-      {warriors.length === 0 && <div>No warriors found for {query?.id}</div>}
       {warriors?.map(({ id, name, image }) => (
         <div key={id}>
           <p>{id}</p>

@@ -141,13 +141,18 @@ export default function Fighter() {
                 alt={attack}
                 height={20}
               />
-              <div style={{ width: 42, display: 'flex' }}>
-                #{opponentWarriorId}
-              </div>
+
               <Link href={`/boss/${opponentOwner}`}>{`${opponentOwner.slice(
                 0,
                 5
               )}...`}</Link>
+
+              <Link href={`/fighter/${opponentWarriorId}`}>
+                <div style={{ width: 42, display: 'flex' }}>
+                  #{opponentWarriorId}
+                </div>
+              </Link>
+
               <Link
                 href={`https://opensea.io/assets/ethereum/0x2dec96736e7d24e382e25d386457f490ae64889e/${opponentWarriorId}`}
               >
