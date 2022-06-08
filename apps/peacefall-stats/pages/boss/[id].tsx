@@ -22,6 +22,8 @@ const Boss = () => {
     () => query.id && `/api/address/${query?.id}`,
     fetcher
   );
+  if (!warriors) return <div>Loading...</div>;
+
   console.log('warriors', warriors);
   return (
     <div
@@ -31,6 +33,7 @@ const Boss = () => {
         gridTemplateColumns: 'repeat( auto-fit, minmax(250px, 1fr)',
       }}
     >
+      {warriors.length === 0 && <div>No warriors found for {query?.id}</div>}
       {warriors?.map(({ id, name, image }) => (
         <div key={id}>
           <p>{id}</p>

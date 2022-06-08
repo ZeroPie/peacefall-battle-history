@@ -28,7 +28,7 @@ export default class Document extends NextDocument {
           <meta property="og:image" content="" />
 
           <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap"
             rel="stylesheet"
           />
         </Head>

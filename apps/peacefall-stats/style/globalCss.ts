@@ -6,6 +6,7 @@ export const globalStyles = globalCss({
     fontWeight: '$light',
     fontSize: '$16',
     color: '$secondary',
+    fontFamily: '$UbuntuMono',
   },
   h1: {
     fontWeight: '$bold',
