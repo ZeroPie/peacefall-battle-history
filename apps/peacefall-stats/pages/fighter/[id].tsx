@@ -141,7 +141,9 @@ export default function Fighter() {
                 alt={attack}
                 height={20}
               />
-              <div>#{opponentWarriorId}</div>
+              <div style={{ width: 42, display: 'flex' }}>
+                #{opponentWarriorId}
+              </div>
               <Link href={`/boss/${opponentOwner}`}>{`${opponentOwner.slice(
                 0,
                 5
