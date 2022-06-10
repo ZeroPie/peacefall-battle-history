@@ -24,8 +24,8 @@ export default class Document extends NextDocument {
           <meta property="og:title" content="Peacefall" />
           <meta property="og:description" content="See a warriors history" />
           <meta property="og:site_name" content="Peacefall" />
-          <meta property="og:url" content="" />
-          <meta property="og:image" content="" />
+          <meta property="og:url" content="https://peacefallstats.vercel.app/" />
+          <meta property="og:image" content="https://peacefall.xyz/img/yakuza.png" />
 
           <link
             href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap"
