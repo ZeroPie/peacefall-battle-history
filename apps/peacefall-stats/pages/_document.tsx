@@ -16,14 +16,14 @@ export default class Document extends NextDocument {
           <meta name="theme-color" content="black" />
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:url" content="" />
-          <meta name="twitter:title" content="See a warriors history" />
-          <meta name="twitter:description" content="See a warriors history" />
+          <meta name="twitter:title" content="Peacefall Stats" />
+          <meta name="twitter:description" content="See a warriors battle history" />
           <meta name="twitter:image" content="" />
-          <meta name="twitter:creator" content="@peacefall battle history" />
+          <meta name="twitter:creator" content="@||||||||||||||||||" />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content="Peacefall" />
-          <meta property="og:description" content="See a warriors history" />
-          <meta property="og:site_name" content="Peacefall" />
+          <meta property="og:title" content="Peacefall Stats" />
+          <meta property="og:description" content="See a warriors battle history" />
+          <meta property="og:site_name" content="Peacefall Stats" />
           <meta property="og:url" content="https://peacefallstats.vercel.app/" />
           <meta property="og:image" content="https://peacefall.xyz/img/yakuza.png" />
 
