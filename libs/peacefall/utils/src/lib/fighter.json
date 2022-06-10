@@ -1,0 +1,242 @@
+{
+  "id": 7040,
+  "chronicle": [
+    {
+      "round": 0,
+      "fatal": null,
+      "id": "0/7040,7467",
+      "combat_entries": [
+        {
+          "warrior": {
+            "syndicate": "EARTH",
+            "id": 7467,
+            "name": "Peacefall #7467",
+            "hp": 41,
+            "level": 0
+          },
+          "attack": "WATER",
+          "owner": "0x7Ce9A3b6c2D34966C27CA66A6b0FDE5e27e55633"
+        },
+        {
+          "warrior": {
+            "syndicate": "RENEGADE",
+            "id": 7040,
+            "name": "Peacefall #7040",
+            "hp": 72,
+            "level": 0
+          },
+          "attack": "EARTH",
+          "owner": "0x4A1a0aeEA2A03eD451b577f51F1d7E5568f29736"
+        }
+      ],
+      "victor": 7040,
+      "recorded_at": "2022-04-21T14:12:59.556124"
+    },
+    {
+      "round": 1,
+      "fatal": null,
+      "id": "1/2966,7040",
+      "combat_entries": [
+        {
+          "warrior": {
+            "syndicate": "FIRE",
+            "id": 2966,
+            "name": "Peacefall #2966",
+            "hp": 51,
+            "level": 0
+          },
+          "attack": "FIRE",
+          "owner": "0xC458e1a4eC03C5039fBF38221C54Be4e63731E2A"
+        },
+        {
+          "warrior": {
+            "syndicate": "RENEGADE",
+            "id": 7040,
+            "name": "Peacefall #7040",
+            "hp": 82,
+            "level": 1
+          },
+          "attack": "WATER",
+          "owner": "0x4A1a0aeEA2A03eD451b577f51F1d7E5568f29736"
+        }
+      ],
+      "victor": 7040,
+      "recorded_at": "2022-04-28T14:28:33.577393"
+    },
+    {
+      "round": 2,
+      "fatal": null,
+      "id": "2/4085,7040",
+      "combat_entries": [
+        {
+          "warrior": {
+            "syndicate": "RENEGADE",
+            "id": 7040,
+            "name": "Peacefall #7040",
+            "hp": 103,
+            "level": 3
+          },
+          "attack": "TIMBER",
+          "owner": "0x4A1a0aeEA2A03eD451b577f51F1d7E5568f29736"
+        },
+        {
+          "warrior": {
+            "syndicate": "WATER",
+            "id": 4085,
+            "name": "Peacefall #4085",
+            "hp": 53,
+            "level": 1
+          },
+          "attack": null,
+          "owner": "0x7f02D5A5561096B231F567002C81ebedCa1A619d"
+        }
+      ],
+      "victor": 7040,
+      "recorded_at": "2022-05-05T14:28:05.082721"
+    },
+    {
+      "round": 3,
+      "fatal": true,
+      "id": "3/2430,7040",
+      "combat_entries": [
+        {
+          "warrior": {
+            "syndicate": "RENEGADE",
+            "id": 7040,
+            "name": "Peacefall #7040",
+            "hp": 129,
+            "level": 4
+          },
+          "attack": "EARTH",
+          "owner": "0x4A1a0aeEA2A03eD451b577f51F1d7E5568f29736"
+        },
+        {
+          "warrior": {
+            "syndicate": "EARTH",
+            "id": 2430,
+            "name": "Peacefall #2430",
+            "hp": 24,
+            "level": 1
+          },
+          "attack": null,
+          "owner": "0xE5F0Fc858aE0010aA3A9f7038cdD0C50BF0dC827"
+        }
+      ],
+      "victor": 7040,
+      "recorded_at": "2022-05-20T14:21:20.546571"
+    },
+    {
+      "round": 4,
+      "fatal": true,
+      "id": "4/1831,7040",
+      "combat_entries": [
+        {
+          "warrior": {
+            "syndicate": "METAL",
+            "id": 1831,
+            "name": "Peacefall #1831",
+            "hp": 72,
+            "level": 4
+          },
+          "attack": "METAL",
+          "owner": "0x457dFcA8C3039b48B09515964bd5875a15B15D17"
+        },
+        {
+          "warrior": {
+            "syndicate": "RENEGADE",
+            "id": 7040,
+            "name": "Peacefall #7040",
+            "hp": 155,
+            "level": 5
+          },
+          "attack": "METAL",
+          "owner": "0x4A1a0aeEA2A03eD451b577f51F1d7E5568f29736"
+        }
+      ],
+      "victor": 7040,
+      "recorded_at": "2022-06-03T14:06:42.791340"
+    },
+    {
+      "round": 5,
+      "fatal": true,
+      "id": "5/3671,7040",
+      "combat_entries": [
+        {
+          "warrior": {
+            "syndicate": "WATER",
+            "id": 3671,
+            "name": "Peacefall #3671",
+            "hp": 108,
+            "level": 5
+          },
+          "attack": "WATER",
+          "owner": "0xa061982D4B087D911Db8399a641187dF945D48D0"
+        },
+        {
+          "warrior": {
+            "syndicate": "RENEGADE",
+            "id": 7040,
+            "name": "Peacefall #7040",
+            "hp": 181,
+            "level": 5
+          },
+          "attack": "WATER",
+          "owner": "0x4A1a0aeEA2A03eD451b577f51F1d7E5568f29736"
+        }
+      ],
+      "victor": 7040,
+      "recorded_at": "2022-06-09T14:45:52.219322"
+    }
+  ],
+  "attributes": [
+    {
+      "value": "The Don",
+      "trait_type": "Character"
+    },
+    {
+      "value": "Alien",
+      "trait_type": "Type"
+    },
+    {
+      "value": "Night",
+      "trait_type": "Hair"
+    },
+    {
+      "value": "Blonde Satin",
+      "trait_type": "Garment (Top)"
+    },
+    {
+      "value": "Sky Slacks",
+      "trait_type": "Garment (Bottom)"
+    },
+    {
+      "value": "Renegade",
+      "trait_type": "Syndicate"
+    },
+    {
+      "value": "Paranza Corta",
+      "trait_type": "Weapon"
+    },
+    {
+      "value": 207,
+      "max_value": 100,
+      "trait_type": "HP"
+    },
+    {
+      "value": "5",
+      "max_value": 4,
+      "trait_type": "Level"
+    },
+    {
+      "value": "No",
+      "trait_type": "Peace"
+    },
+    {
+      "value": "No",
+      "trait_type": "Dead"
+    }
+  ],
+  "animation_url": "https://embedded-nft-smmall.wunderbucket.dev/index-dynamic.html?id=7040",
+  "name": "Peacefall #7040",
+  "image": "https://challengers.peacefall.xyz/7040/4.gif"
+}

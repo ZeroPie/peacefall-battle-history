@@ -1,80 +1,56 @@
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import useSWR from 'swr';
 import Image from 'next/image';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import Link from 'next/link';
+import {FighterRespT, formatFighterResponse} from '@peacefall-stats/peacefall/utils'
 
-const fetcher = async (url) => {
+const fetcher = async (url = '') => {
   const res = await fetch(url);
-  const data = res.json();
-
+  const data = await res.json();
+  const fighter = formatFighterResponse(data)
   if (!res.ok) {
-    const error = { message: res.statusText };
+    const error = {message: res.statusText};
     throw error;
   }
-  return data;
+  return fighter;
 };
 
 export default function Fighter() {
-  const { query } = useRouter();
-  const { data, error } = useSWR(
+  const {query} = useRouter();
+  const {data: fighter, error} = useSWR(
     () => query.id && `/api/fighter/${query.id}`,
     fetcher
   );
 
   if (error) return <div>{error?.message}</div>;
-  if (!data) return <div>Loading...</div>;
+  if (!fighter) return <div>Loading...</div>;
 
-  const levelAttr = data.attributes.find(
-    ({ trait_type }) => trait_type === 'Level'
-  );
-
-  const syndicateAttr = data.attributes.find(
-    ({ trait_type }) => trait_type === 'Syndicate'
-  );
-
-  const hpAttr = data.attributes.find(({ trait_type }) => trait_type === 'HP');
-
-  const characterAttr = data.attributes.find(
-    ({ trait_type }) => trait_type === 'Character'
-  );
-
-  const combatEntries = data?.chronicle?.map(
-    ({ combat_entries }) => combat_entries
-  );
-
-  const peaceAttr = data.attributes.find(
-    ({ trait_type }) => trait_type === 'Peace'
-  );
-
-  const ownCombatEntries = combatEntries?.map((entry) => entry[1]);
-
-  const opponentCombatEntries = combatEntries?.map((entry) => entry[0]);
-
-  const ownSyndicate = syndicateAttr?.value;
 
   return (
     <div
       style={{
         display: 'grid',
         justifyContent: 'center',
-        alignContent: 'center',
+        alignContent: 'center'
       }}
     >
-      <div style={{ display: 'grid', justifyContent: 'center' }}>
-        <h1 style={{ margin: 0, marginBottom: 6 }}>
-          {characterAttr?.value} #{data?.id}
+      <div style={{display: 'grid', justifyContent: 'center'}}>
+        <h1 style={{margin: 0, marginBottom: 6}}>
+          {fighter.character} #{fighter.id}
         </h1>
         <div>
-          <div style={{ position: 'absolute', zIndex: 2, color: 'black' }}>
-            HP: {hpAttr?.value}
+          <div style={{position: 'absolute', zIndex: 1, background: 'black', opacity: 0.3, padding: 2, width: 64, height: 24}}>
+          </div>
+          <div style={{position: 'absolute', zIndex: 2, color: 'white', padding: 4}}>
+            HP: {fighter.hp}
           </div>
           <Image
-            src={data?.image}
+            src={fighter?.image}
             width={260}
             height={260}
             layout="fixed"
-            alt={`${characterAttr?.value} #${data?.id}`}
+            alt={`${fighter?.name} #${fighter?.id}`}
           />
         </div>
 
@@ -83,78 +59,83 @@ export default function Fighter() {
             display: 'flex',
             marginTop: 8,
             marginBottom: 16,
-            justifyContent: 'space-between',
+            justifyContent: 'space-between'
           }}
         >
           <h2>
-            Level {levelAttr?.value} {peaceAttr?.value === 'Yes' ? `☮️` : `⚔️`}
+            Level {fighter?.level} {fighter?.peace === 'Yes' ? `☮️` : `⚔️`}
           </h2>
 
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+
+          <div style={{display: 'flex', alignItems: 'center'}}>
             <Image
-              src={`/syndicate.${ownSyndicate.toLowerCase()}.png`}
+              src={`/syndicate.${fighter?.syndicate?.toLowerCase()}.png`}
               width={20}
               layout="fixed"
-              alt={syndicateAttr}
+              alt={fighter?.syndicate}
               height={20}
             />
-            <h2 style={{ marginLeft: 8 }}>{ownSyndicate}</h2>
+            <h2 style={{marginLeft: 8}}>{fighter?.syndicate}</h2>
           </div>
         </div>
       </div>
 
-      <div key={uuidv4()} style={{ display: 'flex', gap: 12 }}>
+      <div key={uuidv4()} style={{display: 'flex', gap: 12}}>
         <div>&nbsp;</div>
         <div>&nbsp;</div>
         <div>&nbsp;&nbsp;&nbsp;</div>
         <div>&nbsp;&nbsp;&nbsp;</div>
         <div>&nbsp;</div>
       </div>
-      <div style={{ display: 'grid', gridGap: 12 }}>
-        {ownCombatEntries.map(({ attack, owner, warrior }, index) => {
-          const victor = data?.chronicle[index]?.victor;
-          const isVictor = victor === data?.id;
-          const round = data?.chronicle[index]?.round;
-          const ownAttack = attack || ownSyndicate;
-          const opponentOwner = opponentCombatEntries[index]?.owner;
-          const opponentSyndicate =
-            opponentCombatEntries[index]?.warrior?.syndicate || '';
-          const opponentWarriorId = opponentCombatEntries[index]?.warrior?.id;
-          const opponentAttack =
-            opponentCombatEntries[index]?.attack || opponentSyndicate;
+      <div style={{display: 'grid', gridGap: 12}}>
+        {fighter?.fights.map(({victor, round, self, opponent, fatal}) => {
+          const ownAttack = self.attack || fighter?.syndicate;
+          const oppAttack = opponent.attack || opponent?.syndicate;
+          const ownDefaulted = !self.attack;
+          const oppDefaulted = !opponent.attack;
 
           return (
-            <div key={uuidv4()} style={{ display: 'flex', gap: 12 }}>
+            <div key={uuidv4()} style={{display: 'flex', gap: 12}}>
               {round + 1}
-              {isVictor ? <div>W</div> : <div>L</div>}
-              <Link href={`/boss/${owner}`}>{`${owner.slice(0, 5)}...`}</Link>
-              <Image
-                src={`/syndicate.${ownAttack?.toLowerCase()}.png`}
-                width={20}
-                layout="fixed"
-                alt={attack}
-                height={20}
-              />
-              <Image
-                src={`/syndicate.${opponentAttack?.toLowerCase()}.png`}
-                width={20}
-                alt={attack}
-                height={20}
-              />
+              {victor === fighter?.id ? <div>W</div> : <div>L</div>}
+              <Link href={`/boss/${self?.owner}`}>{`${self?.owner?.slice(0, 5)}...`}</Link>
+              <div style={{position: 'relative'}}>
+                <Image
+                  src={`/syndicate.${ownAttack?.toLowerCase()}.png`}
+                  width={20}
+                  layout="fixed"
+                  alt={self?.attack}
+                  height={20}
+                />
+                <div style={{position: 'absolute', top: 0, right: 0, background: 'black', paddingLeft: 3}}>
+                  {ownDefaulted && 'D'}
+                </div>
+              </div>
+              <div style={{position: 'relative'}}>
+                <Image
+                  src={`/syndicate.${oppAttack.toLowerCase()}.png`}
+                  width={20}
+                  alt={opponent?.attack}
+                  height={20}
+                />
+                  <div style={{position: 'absolute', top: 0, right: 0, background: 'black', paddingLeft: 3}}>
+                  {oppDefaulted && 'D'}
+                </div>
+              </div>
 
-              <Link href={`/boss/${opponentOwner}`}>{`${opponentOwner.slice(
+              <Link href={`/boss/${opponent.owner}`}>{`${opponent.owner.slice(
                 0,
                 5
               )}...`}</Link>
 
-              <Link href={`/fighter/${opponentWarriorId}`}>
-                <div style={{ width: 42, display: 'flex' }}>
-                  #{opponentWarriorId}
+              <Link href={`/fighter/${opponent.id}`}>
+                <div style={{width: 42, display: 'flex'}}>
+                  #{opponent.id}
                 </div>
               </Link>
 
               <Link
-                href={`https://opensea.io/assets/ethereum/0x2dec96736e7d24e382e25d386457f490ae64889e/${opponentWarriorId}`}
+                href={`https://opensea.io/assets/ethereum/0x2dec96736e7d24e382e25d386457f490ae64889e/${opponent.id}`}
               >
                 <Image
                   src="/opensea-icon.png"

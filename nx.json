@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "peacefall-battle-history",
+  "npmScope": "peacefall-stats",
   "affected": {
     "defaultBase": "main"
   },

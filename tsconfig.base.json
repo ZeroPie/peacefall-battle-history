@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@peacefall-stats/peacefall/utils": [
+        "libs/peacefall/utils/src/index.ts"
+      ],
       "@peacefall-ui": ["libs/peacefall/ui/src/index.ts"],
       "app/*": ["apps/my-org/src/app/*"]
     }

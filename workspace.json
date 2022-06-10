@@ -2,9 +2,10 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "peacefall-stats-e2e": "apps/peacefall-stats-e2e",
     "peacefall-stats": "apps/peacefall-stats",
+    "peacefall-stats-e2e": "apps/peacefall-stats-e2e",
     "peacefall-ui": "libs/peacefall/ui",
-    "peacefall-ui-e2e": "apps/peacefall-ui-e2e"
+    "peacefall-ui-e2e": "apps/peacefall-ui-e2e",
+    "peacefall-utils": "libs/peacefall/utils"
   }
 }

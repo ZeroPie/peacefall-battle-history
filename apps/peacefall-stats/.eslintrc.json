@@ -12,7 +12,7 @@
       "rules": {
         "@next/next/no-html-link-for-pages": [
           "error",
-          "apps/peacefall-battle-history/pages"
+          "apps/peacefall-stats/pages"
         ]
       }
     },
