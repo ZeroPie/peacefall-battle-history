@@ -107,7 +107,7 @@ export default function Fighter() {
               {round + 1}
               {victor === fighter?.id ? <div>W</div> : <div>L</div>}
               <div style={{cursor: 'pointer'}}>
-                <Link href={`/boss/${self?.owner}`}>{`${self?.owner?.slice(0, 5)}...`}</Link>
+                <Link href={`/boss/${self?.owner}`}>{`${self?.owner?.slice(0, 5)}..`}</Link>
               </div>
               <div style={{position: 'relative'}}>
                 <Image
@@ -143,7 +143,7 @@ export default function Fighter() {
                 <Link href={`/boss/${opponent.owner}`}>{`${opponent.owner.slice(
                   0,
                   5
-                )}...`}
+                )}..`}
                 </Link>
               </div>
 
