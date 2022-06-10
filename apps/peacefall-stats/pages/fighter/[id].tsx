@@ -103,13 +103,13 @@ export default function Fighter() {
           const oppDefaulted = !opponent.attack;
 
           return (
-            <div key={uuidv4()} style={{display: 'flex', gap: 12}}>
-              {round + 1}
-              {victor === fighter?.id ? <div>W</div> : <div>L</div>}
+            <div key={uuidv4()} style={{display: 'flex', gap: '24px 12px', alignItems: 'center'}}>
+              {round + 1}.
+              {victor === fighter?.id ? <div style={{color: 'green'}}>W</div> : <div style={{color: 'red'}}>L</div>}
               <div style={{cursor: 'pointer'}}>
                 <Link href={`/boss/${self?.owner}`}>{`${self?.owner?.slice(0, 5)}..`}</Link>
               </div>
-              <div style={{position: 'relative'}}>
+              <div style={{position: 'relative', display: 'flex'}}>
                 <Image
                   src={`/syndicate.${ownAttack?.toLowerCase()}.png`}
                   width={20}
@@ -127,7 +127,7 @@ export default function Fighter() {
               <div style={{width: 22, display: 'flex', justifyContent: 'center'}}>
                 {opponent.hp}
               </div>
-              <div style={{position: 'relative'}}>
+              <div style={{position: 'relative', display:'flex'}}>
                 <Image
                   src={`/syndicate.${oppAttack.toLowerCase()}.png`}
                   width={20}
@@ -175,7 +175,9 @@ export default function Fighter() {
                 />
               </Link>
 
-
+              <div style={{lineHeight: 1}}>
+                {fatal && '☠️'}
+              </div>
             </div>
           );
         })}
