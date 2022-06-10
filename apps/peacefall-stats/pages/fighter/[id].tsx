@@ -40,7 +40,15 @@ export default function Fighter() {
           {fighter.character} #{fighter.id}
         </h1>
         <div>
-          <div style={{position: 'absolute', zIndex: 1, background: 'black', opacity: 0.3, padding: 2, width: 64, height: 24}}>
+          <div style={{
+            position: 'absolute',
+            zIndex: 1,
+            background: 'black',
+            opacity: 0.3,
+            padding: 2,
+            width: 64,
+            height: 24
+          }}>
           </div>
           <div style={{position: 'absolute', zIndex: 2, color: 'white', padding: 4}}>
             HP: {fighter.hp}
@@ -98,7 +106,9 @@ export default function Fighter() {
             <div key={uuidv4()} style={{display: 'flex', gap: 12}}>
               {round + 1}
               {victor === fighter?.id ? <div>W</div> : <div>L</div>}
-              <Link href={`/boss/${self?.owner}`}>{`${self?.owner?.slice(0, 5)}...`}</Link>
+              <div style={{cursor: 'pointer'}}>
+                <Link href={`/boss/${self?.owner}`}>{`${self?.owner?.slice(0, 5)}...`}</Link>
+              </div>
               <div style={{position: 'relative'}}>
                 <Image
                   src={`/syndicate.${ownAttack?.toLowerCase()}.png`}
@@ -111,6 +121,12 @@ export default function Fighter() {
                   {ownDefaulted && 'D'}
                 </div>
               </div>
+              <div style={{width: 22, display: 'flex', justifyContent: 'center'}}>
+                {self.hp}
+              </div>
+              <div style={{width: 22, display: 'flex', justifyContent: 'center'}}>
+                {opponent.hp}
+              </div>
               <div style={{position: 'relative'}}>
                 <Image
                   src={`/syndicate.${oppAttack.toLowerCase()}.png`}
@@ -118,18 +134,21 @@ export default function Fighter() {
                   alt={opponent?.attack}
                   height={20}
                 />
-                  <div style={{position: 'absolute', top: 0, right: 0, background: 'black', paddingLeft: 3}}>
+                <div style={{position: 'absolute', top: 0, right: 0, background: 'black', paddingLeft: 3}}>
                   {oppDefaulted && 'D'}
                 </div>
               </div>
 
-              <Link href={`/boss/${opponent.owner}`}>{`${opponent.owner.slice(
-                0,
-                5
-              )}...`}</Link>
+              <div style={{cursor: 'pointer'}}>
+                <Link href={`/boss/${opponent.owner}`}>{`${opponent.owner.slice(
+                  0,
+                  5
+                )}...`}
+                </Link>
+              </div>
 
               <Link href={`/fighter/${opponent.id}`}>
-                <div style={{width: 42, display: 'flex'}}>
+                <div style={{width: 42, display: 'flex', cursor: 'pointer'}}>
                   #{opponent.id}
                 </div>
               </Link>
@@ -138,12 +157,16 @@ export default function Fighter() {
                 href={`https://opensea.io/assets/ethereum/0x2dec96736e7d24e382e25d386457f490ae64889e/${opponent.id}`}
               >
                 <Image
+                  style={{cursor: 'pointer'}}
                   src="/opensea-icon.png"
                   alt="opensea"
-                  width={20}
-                  height={20}
+                  layout="fixed"
+                  width={18}
+                  height={18}
                 />
               </Link>
+
+
             </div>
           );
         })}
