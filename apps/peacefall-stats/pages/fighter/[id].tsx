@@ -148,8 +148,17 @@ export default function Fighter() {
               </div>
 
               <Link href={`/fighter/${opponent.id}`}>
-                <div style={{width: 42, display: 'flex', cursor: 'pointer'}}>
-                  #{opponent.id}
+                <div style={{display: 'flex', alignContent: 'center'}}>
+                  <div style={{width: 42, display: 'flex', cursor: 'pointer', marginRight: 4}}>
+                    #{opponent.id}
+                  </div>
+                    <Image
+                      src={`/syndicate.${opponent.syndicate.toLowerCase()}.png`}
+                      width={16}
+                      layout='fixed'
+                      alt={opponent?.syndicate}
+                      height={16}
+                    />
                 </div>
               </Link>
 
