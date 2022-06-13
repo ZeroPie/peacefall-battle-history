@@ -3,16 +3,19 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Image from 'next/image';
+import {FighterT, formatFighterResponse} from '@peacefall-stats/peacefall/utils'
+import Link from 'next/link'
 
 const fetcher = async (url) => {
   const res = await fetch(url);
-  const data = res.json();
+  const data = await res.json();
+  const fighters = data?.map(formatFighterResponse)
 
   if (!res.ok) {
     const error = { message: res.statusText };
     throw error;
   }
-  return data;
+  return fighters as FighterT[];
 };
 
 const Boss = () => {
@@ -23,6 +26,8 @@ const Boss = () => {
     fetcher
   );
 
+  console.log('warriors', warriors)
+
   if (error) return <div>{error?.message}</div>;
   if (!warriors) return <div>Loading...</div>;
   if (warriors.length === 0)
@@ -32,15 +37,28 @@ const Boss = () => {
     <div
       style={{
         display: 'grid',
+        justifyItems: 'center',
         gridGap: '1rem',
         gridTemplateColumns: 'repeat( auto-fit, minmax(250px, 1fr)',
       }}
     >
-      {warriors?.map(({ id, name, image }) => (
+      {warriors?.map(({ id, name, image, hp, fights, level, peace }) => (
         <div key={id}>
-          <p>{id}</p>
-          <p>{name}</p>
-          <Image src={image} width={260} height={260} />
+          <Link href={`/fighter/${id}`}>
+            <h2 style={{ cursor: 'pointer', marginBottom: 8 }}>
+              {name}
+            </h2>
+          </Link>
+
+          <Link href={`/fighter/${id}`}>
+            <Image src={image} width={260} height={260} style={{ cursor: 'pointer' }}/>
+          </Link>
+          <h2>
+            Level {level} {peace === 'Yes' ? `☮️` : `⚔️`}
+          </h2>
+          <p>id: {id}</p>
+          <p>hp: {hp}</p>
+          <p> fights: {fights?.length}</p>
         </div>
       ))}
     </div>

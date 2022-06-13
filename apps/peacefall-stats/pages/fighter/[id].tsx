@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import Image from 'next/image';
 import {v4 as uuidv4} from 'uuid';
 import Link from 'next/link';
-import {FighterRespT, formatFighterResponse} from '@peacefall-stats/peacefall/utils'
+import { formatFighterResponse} from '@peacefall-stats/peacefall/utils'
 
 const fetcher = async (url = '') => {
   const res = await fetch(url);
@@ -55,8 +55,8 @@ export default function Fighter() {
           </div>
           <Image
             src={fighter?.image}
-            width={260}
-            height={260}
+            width={280}
+            height={280}
             layout="fixed"
             alt={`${fighter?.name} #${fighter?.id}`}
           />
@@ -109,7 +109,7 @@ export default function Fighter() {
               <div style={{cursor: 'pointer'}}>
                 <Link href={`/boss/${self?.owner}`}>{`${self?.owner?.slice(0, 5)}..`}</Link>
               </div>
-              <div style={{position: 'relative', display: 'flex'}}>
+              <div style={{position: 'relative', display: 'flex', width: 'max-content'}}>
                 <Image
                   src={`/syndicate.${ownAttack?.toLowerCase()}.png`}
                   width={20}
@@ -127,7 +127,7 @@ export default function Fighter() {
               <div style={{width: 22, display: 'flex', justifyContent: 'center'}}>
                 {opponent.hp}
               </div>
-              <div style={{position: 'relative', display:'flex'}}>
+              <div style={{position: 'relative', display:'flex', width: 'max-content' }}>
                 <Image
                   src={`/syndicate.${oppAttack.toLowerCase()}.png`}
                   width={20}
