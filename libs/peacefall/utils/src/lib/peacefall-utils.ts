@@ -6,6 +6,7 @@ import {
   FighterT,
   TournamentEntryT,
 } from './types';
+import { contextChroniclesToFights } from 'libs/peacefall/utils/src/lib/tournament-utils';
 
 export const attributeExtractor = ({
   value = '',
@@ -78,6 +79,7 @@ export const formatFighterResponse = ({
     ...createFightsArray({ fighterId: id })({
       chronicle,
     }),
+    ...contextChroniclesToFights({ context_chronicles, id }),
   ],
 });
 

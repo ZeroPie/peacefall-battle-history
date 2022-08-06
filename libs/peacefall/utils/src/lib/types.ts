@@ -72,6 +72,7 @@ export type FightEntryT = {
   opponent?: FighterStatsT;
   self?: FighterStatsT;
   id: number;
+  context_id?: string;
   fatal: boolean | null;
 };
 // syndicate type in attacks is in Caps

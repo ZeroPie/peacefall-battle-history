@@ -51,7 +51,7 @@ export default function Fighter() {
               width: 64,
               height: 24,
             }}
-          ></div>
+          />
           <div
             style={{
               position: 'absolute',
@@ -94,8 +94,12 @@ export default function Fighter() {
             <h2 style={{ marginLeft: 8 }}>{fighter?.syndicate}</h2>
           </div>
         </div>
-        <h3>Kills:</h3>
-        <h3>Potions Used: {fighter?.['potions used']}</h3>
+        {!!fighter['potions used'] && (
+          <h3>
+            Potions used: {''}
+            {new Array(parseInt(fighter?.['potions used'])).fill('🧪')}
+          </h3>
+        )}
       </div>
 
       <div key={uuidv4()} style={{ display: 'flex', gap: 12 }}>
@@ -106,11 +110,11 @@ export default function Fighter() {
         <div>&nbsp;</div>
       </div>
       <div style={{ display: 'grid', gridGap: 12 }}>
-        {fighter?.fights.map(({ victor, round, self, opponent, fatal }) => {
-          const ownAttack = self.attack || fighter?.syndicate;
-          const oppAttack = opponent.attack || opponent?.syndicate;
-          const ownDefaulted = !self.attack;
-          const oppDefaulted = !opponent.attack;
+        {fighter?.fights.map(({ victor, round, self, opponent, fatal, id }) => {
+          const ownAttack = self?.attack || fighter?.syndicate;
+          const oppAttack = opponent?.attack || opponent?.syndicate;
+          const ownDefaulted = !self?.attack;
+          const oppDefaulted = !opponent?.attack;
 
           return (
             <div
@@ -128,10 +132,14 @@ export default function Fighter() {
                 <div style={{ color: 'red' }}>L</div>
               )}
               <div style={{ cursor: 'pointer' }}>
-                <Link href={`/boss/${self?.owner}`}>{`${self?.owner?.slice(
-                  0,
-                  5
-                )}..`}</Link>
+                {self?.owner ? (
+                  <Link href={`/boss/${self?.owner}`}>{`${self?.owner?.slice(
+                    0,
+                    5
+                  )}..`}</Link>
+                ) : (
+                  '-------'
+                )}
               </div>
               <div
                 style={{
@@ -162,12 +170,12 @@ export default function Fighter() {
               <div
                 style={{ width: 22, display: 'flex', justifyContent: 'center' }}
               >
-                {self.hp}
+                {self?.hp}
               </div>
               <div
                 style={{ width: 22, display: 'flex', justifyContent: 'center' }}
               >
-                {opponent.hp}
+                {opponent?.hp}
               </div>
               <div
                 style={{
@@ -195,9 +203,13 @@ export default function Fighter() {
                 </div>
               </div>
               <div style={{ cursor: 'pointer' }}>
-                <Link href={`/boss/${opponent.owner}`}>
-                  {`${opponent.owner.slice(0, 5)}..`}
-                </Link>
+                {opponent?.owner ? (
+                  <Link href={`/boss/${opponent.owner}`}>
+                    {`${opponent?.owner?.slice(0, 5)}..`}
+                  </Link>
+                ) : (
+                  '-------'
+                )}
               </div>
               <Link href={`/fighter/${opponent.id}`}>
                 <div style={{ display: 'flex', alignContent: 'center' }}>
@@ -232,7 +244,10 @@ export default function Fighter() {
                   height={18}
                 />
               </Link>
-              <div style={{ lineHeight: 1 }}>{fatal && '☠️'}</div>
+              {fatal && <div style={{ lineHeight: 1 }}>☠️</div>}
+              {id === -1 && (
+                <div style={{ lineHeight: 1 }}>{id === -1 && '🤼️'}</div>
+              )}
             </div>
           );
         })}

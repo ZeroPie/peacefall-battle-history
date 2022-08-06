@@ -12,6 +12,7 @@ export const tournamentEntryToFight = ({
 }: TournamentEntryT) => ({
   ...warrior,
   attack: current_attack,
+  owner: '',
 });
 
 export const contextChroniclesToArray = ({
@@ -25,10 +26,10 @@ export const contextChroniclesToArray = ({
   );
 
 export const contextChronicleToFight = ({
-  fighterId,
+  fighterId = 0,
   contextChronicle,
 }: {
-  fighterId: number;
+  fighterId?: number;
   contextChronicle: ContextChronicleT;
 }): FightEntryT => {
   const selfEntry = contextChronicle?.entries?.find(
@@ -39,7 +40,8 @@ export const contextChronicleToFight = ({
   );
 
   return {
-    id: 0,
+    id: -1,
+    context_id: contextChronicle?.context_id,
     fatal: null,
     self: selfEntry && tournamentEntryToFight(selfEntry),
     opponent: opponentEntry && tournamentEntryToFight(opponentEntry),
@@ -48,10 +50,10 @@ export const contextChronicleToFight = ({
   };
 };
 
-export const contextChroniclesToFights = (fighter: FighterRespT) =>
+export const contextChroniclesToFights = (fighter: Partial<FighterRespT>) =>
   contextChroniclesToArray(fighter).map((contextChronicle) =>
     contextChronicleToFight({
-      fighterId: fighter.id,
+      fighterId: fighter?.id,
       contextChronicle: contextChronicle,
     })
   );

@@ -88,12 +88,14 @@ describe('tournament-utils', () => {
 
     expect(fights).toStrictEqual([
       {
+        context_id: 'champions-2022-07',
         fatal: null,
-        id: 0,
+        id: -1,
         opponent: {
           attack: 'FIRE',
           hp: 99,
           id: 3244,
+          owner: '',
           syndicate: 'WATER',
         },
         round: 0,
@@ -101,17 +103,20 @@ describe('tournament-utils', () => {
           attack: 'WATER',
           hp: 239,
           id: 7040,
+          owner: '',
           syndicate: 'RENEGADE',
         },
         victor: 7040,
       },
       {
+        context_id: 'champions-2022-07',
         fatal: null,
-        id: 0,
+        id: -1,
         opponent: {
           attack: 'EARTH',
           hp: 113,
           id: 3309,
+          owner: '',
           syndicate: 'WATER',
         },
         round: 1,
@@ -119,6 +124,7 @@ describe('tournament-utils', () => {
           attack: 'EARTH',
           hp: 239,
           id: 7040,
+          owner: '',
           syndicate: 'RENEGADE',
         },
         victor: 7040,
