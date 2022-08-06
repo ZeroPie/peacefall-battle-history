@@ -95,7 +95,7 @@ export default function Fighter() {
           </div>
         </div>
         <h3>Kills:</h3>
-        <h3>Potions Used:</h3>
+        <h3>Potions Used: {fighter?.['potions used']}</h3>
       </div>
 
       <div key={uuidv4()} style={{ display: 'flex', gap: 12 }}>

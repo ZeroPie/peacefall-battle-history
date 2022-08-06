@@ -2,6 +2,7 @@ import {
   ContextChroniclesT,
   ContextChronicleT,
   FightEntryT,
+  FighterRespT,
   TournamentEntryT,
 } from './types';
 
@@ -46,3 +47,11 @@ export const contextChronicleToFight = ({
     victor: contextChronicle?.victor,
   };
 };
+
+export const contextChroniclesToFights = (fighter: FighterRespT) =>
+  contextChroniclesToArray(fighter).map((contextChronicle) =>
+    contextChronicleToFight({
+      fighterId: fighter.id,
+      contextChronicle: contextChronicle,
+    })
+  );

@@ -1,18 +1,12 @@
 import * as fighterMock from './fighter.json';
-import { ContextChroniclesT, ContextChronicleT, FighterRespT } from './types';
-import { contextChronicleToFight } from './tournament-utils';
+import { FighterRespT } from './types';
+import {
+  contextChroniclesToArray,
+  contextChroniclesToFights,
+  contextChronicleToFight,
+} from './tournament-utils';
 
 const fighter = fighterMock as unknown as FighterRespT;
-
-const contextChroniclesToArray = ({
-  context_chronicles = {},
-}: {
-  context_chronicles?: ContextChroniclesT;
-}) =>
-  Object.keys(context_chronicles).reduce(
-    (prev, curr) => context_chronicles[curr],
-    [] as ContextChronicleT[]
-  );
 
 describe('tournament-utils', () => {
   it('should extract the object', () => {
@@ -33,6 +27,31 @@ describe('tournament-utils', () => {
           },
         ],
         state: 0,
+        victor: 7040,
+      },
+      {
+        context_id: 'champions-2022-07',
+        entries: [
+          {
+            current_attack: 'EARTH',
+            previous_attack: 'WATER',
+            warrior: {
+              hp: 239,
+              id: 7040,
+              syndicate: 'RENEGADE',
+            },
+          },
+          {
+            current_attack: 'EARTH',
+            previous_attack: null,
+            warrior: {
+              hp: 113,
+              id: 3309,
+              syndicate: 'WATER',
+            },
+          },
+        ],
+        state: 1,
         victor: 7040,
       },
     ]);
@@ -65,16 +84,11 @@ describe('tournament-utils', () => {
   });
 
   it('should create a valid fights array from the context_chronicles Object', () => {
-    const contextChroniclesArr = contextChroniclesToArray(fighter);
+    const contextChroniclesArr = contextChroniclesToFights(fighter);
 
-    const fights = contextChroniclesArr.map((contextChronicle) =>
-      contextChronicleToFight({
-        fighterId: 7040,
-        contextChronicle: contextChronicle,
-      })
-    );
+    const fightss = contextChroniclesToFights(fighter);
 
-    expect(fights).toStrictEqual([
+    expect(fightss).toStrictEqual([
       {
         fatal: null,
         id: 0,
