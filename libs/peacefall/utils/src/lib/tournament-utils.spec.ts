@@ -84,11 +84,9 @@ describe('tournament-utils', () => {
   });
 
   it('should create a valid fights array from the context_chronicles Object', () => {
-    const contextChroniclesArr = contextChroniclesToFights(fighter);
+    const fights = contextChroniclesToFights(fighter);
 
-    const fightss = contextChroniclesToFights(fighter);
-
-    expect(fightss).toStrictEqual([
+    expect(fights).toStrictEqual([
       {
         fatal: null,
         id: 0,
