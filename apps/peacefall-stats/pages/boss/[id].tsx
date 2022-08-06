@@ -1,5 +1,3 @@
-//peacefall.xyz/api/rankings/totalOwned?address=${owner}
-
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Image from 'next/image';
@@ -9,6 +7,7 @@ import {
 } from '@peacefall-stats/peacefall/utils';
 import Link from 'next/link';
 import { Button } from '@peacefall-ui';
+import { v4 as uuidv4 } from 'uuid';
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -69,16 +68,15 @@ const Boss = () => {
               <p> fights: {fights?.length}</p>
 
               {fights.map(({ self, victor }) => {
-                const ownAttack = self?.attack || syndicate;
-                const ownDefaulted = !self?.attack;
                 return (
                   <div
+                    key={uuidv4()}
                     style={{
                       display: 'grid',
                       alignItems: 'center',
                       gridAutoFlow: 'column',
                     }}
-                  ></div>
+                  />
                 );
               })}
             </div>

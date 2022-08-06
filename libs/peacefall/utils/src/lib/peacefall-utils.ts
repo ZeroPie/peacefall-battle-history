@@ -6,7 +6,7 @@ import {
   FighterT,
   TournamentEntryT,
 } from './types';
-import { contextChroniclesToFights } from 'libs/peacefall/utils/src/lib/tournament-utils';
+import { contextChroniclesToFights } from './tournament-utils';
 
 export const attributeExtractor = ({
   value = '',

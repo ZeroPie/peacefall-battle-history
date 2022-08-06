@@ -12,8 +12,7 @@ const fetcher = async (url = '') => {
   const fighter = formatFighterResponse(data);
   console.log('fighter', fighter);
   if (!res.ok) {
-    const error = { message: res.statusText };
-    throw error;
+    throw { message: res.statusText };
   }
   return fighter;
 };
