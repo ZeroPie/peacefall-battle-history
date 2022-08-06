@@ -1,0 +1,116 @@
+import * as fighterMock from './fighter.json';
+import { ContextChroniclesT, ContextChronicleT, FighterRespT } from './types';
+import { contextChronicleToFight } from './tournament-utils';
+
+const fighter = fighterMock as unknown as FighterRespT;
+
+const contextChroniclesToArray = ({
+  context_chronicles = {},
+}: {
+  context_chronicles?: ContextChroniclesT;
+}) =>
+  Object.keys(context_chronicles).reduce(
+    (prev, curr) => context_chronicles[curr],
+    [] as ContextChronicleT[]
+  );
+
+describe('tournament-utils', () => {
+  it('should extract the object', () => {
+    const contextChronicles = contextChroniclesToArray(fighter);
+    expect(contextChronicles).toStrictEqual([
+      {
+        context_id: 'champions-2022-07',
+        entries: [
+          {
+            current_attack: 'WATER',
+            previous_attack: null,
+            warrior: { hp: 239, id: 7040, syndicate: 'RENEGADE' },
+          },
+          {
+            current_attack: 'FIRE',
+            previous_attack: null,
+            warrior: { hp: 99, id: 3244, syndicate: 'WATER' },
+          },
+        ],
+        state: 0,
+        victor: 7040,
+      },
+    ]);
+  });
+
+  it('contextChronicle should be turned into a fight', () => {
+    expect(
+      contextChronicleToFight({
+        fighterId: 7040,
+        contextChronicle: contextChroniclesToArray(fighter)[0],
+      })
+    ).toStrictEqual({
+      fatal: null,
+      id: 0,
+      round: 0,
+      opponent: {
+        attack: 'FIRE',
+        hp: 99,
+        id: 3244,
+        syndicate: 'WATER',
+      },
+      self: {
+        attack: 'WATER',
+        hp: 239,
+        id: 7040,
+        syndicate: 'RENEGADE',
+      },
+      victor: 7040,
+    });
+  });
+
+  it('should create a valid fights array from the context_chronicles Object', () => {
+    const contextChroniclesArr = contextChroniclesToArray(fighter);
+
+    const fights = contextChroniclesArr.map((contextChronicle) =>
+      contextChronicleToFight({
+        fighterId: 7040,
+        contextChronicle: contextChronicle,
+      })
+    );
+
+    expect(fights).toStrictEqual([
+      {
+        fatal: null,
+        id: 0,
+        opponent: {
+          attack: 'FIRE',
+          hp: 99,
+          id: 3244,
+          syndicate: 'WATER',
+        },
+        round: 0,
+        self: {
+          attack: 'WATER',
+          hp: 239,
+          id: 7040,
+          syndicate: 'RENEGADE',
+        },
+        victor: 7040,
+      },
+      {
+        fatal: null,
+        id: 0,
+        opponent: {
+          attack: 'EARTH',
+          hp: 113,
+          id: 3309,
+          syndicate: 'WATER',
+        },
+        round: 1,
+        self: {
+          attack: 'EARTH',
+          hp: 239,
+          id: 7040,
+          syndicate: 'RENEGADE',
+        },
+        victor: 7040,
+      },
+    ]);
+  });
+});

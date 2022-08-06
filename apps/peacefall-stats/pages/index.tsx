@@ -47,11 +47,7 @@ export function Index({ fighter }) {
 export default Index;
 
 export async function getStaticProps() {
-  // Instead of fetching your `/api` route you can call the same
-  // function directly in `getStaticProps`
   const response = await fetch('https://challengers.peacefall.xyz/1.json');
   const fighter = await response.json();
-
-  // Props returned will be passed to the page component
   return { props: { fighter } };
 }

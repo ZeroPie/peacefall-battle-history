@@ -17,15 +17,12 @@ export default async function addressHandler(
         );
         const { data } = await response.json();
 
-        console.log('data', data);
         const fetches = data.map(({ warrior_id }) =>
           fetch(`https://challengers.peacefall.xyz/${warrior_id}.json`)
         );
 
         const responses = await Promise.all([...fetches]);
         const fighters = await Promise.all(responses.map((r) => r.json()));
-
-        console.log('fighters', fighters);
 
         res.status(200).json(fighters);
       } catch (error) {
