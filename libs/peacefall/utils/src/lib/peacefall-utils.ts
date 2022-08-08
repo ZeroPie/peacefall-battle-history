@@ -79,7 +79,7 @@ export const formatFighterResponse = ({
     ...createFightsArray({ fighterId: id })({
       chronicle,
     }),
-    ...contextChroniclesToFights({ context_chronicles, id }),
+    ...contextChroniclesToFights({ context_chronicles, id }).reverse(),
   ],
 });
 
