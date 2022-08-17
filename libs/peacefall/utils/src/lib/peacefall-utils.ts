@@ -2,6 +2,7 @@ import {
   ApiAttrT,
   ChronicleEntryT,
   CombatEntryT,
+  FightEntryT,
   FighterRespT,
   FighterT,
   TournamentEntryT,
@@ -65,6 +66,11 @@ export const createFightsArray =
   ({ chronicle }: { chronicle: ChronicleEntryT[] }) =>
     chronicle?.map(createFightObject({ fighterId }));
 
+const sortByRoundDescending = (a: FightEntryT, b: FightEntryT) =>
+  a?.round < b?.round ? -1 : 1;
+
+const sortByTournamentLast = (a: FightEntryT) => (a.id === -1 ? 1 : -1);
+
 export const formatFighterResponse = ({
   id = 0,
   attributes = [],
@@ -78,9 +84,11 @@ export const formatFighterResponse = ({
   fights: [
     ...createFightsArray({ fighterId: id })({
       chronicle,
-    }),
-    ...contextChroniclesToFights({ context_chronicles, id }).reverse(),
-  ],
+    }).reverse(),
+    ...contextChroniclesToFights({ context_chronicles, id }).sort(
+      sortByRoundDescending
+    ),
+  ].sort(sortByTournamentLast),
 });
 
 export { formatFighterResponse as default };
