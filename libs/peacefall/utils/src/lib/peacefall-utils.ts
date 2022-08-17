@@ -89,6 +89,9 @@ export const formatFighterResponse = ({
       sortByRoundDescending
     ),
   ].sort(sortByTournamentLast),
+  kills: createFightsArray({ fighterId: id })({ chronicle }).filter(
+    ({ fatal }) => fatal === true
+  ).length,
 });
 
 export { formatFighterResponse as default };

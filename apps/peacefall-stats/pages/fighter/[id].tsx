@@ -27,6 +27,12 @@ export default function Fighter() {
   if (error) return <div>{error?.message}</div>;
   if (!fighter) return <div>Loading...</div>;
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const consecutiveWins = fighter.fights.reduce(
+    () => (acc, curr) => curr.victor === fighter.id ? (acc += 1) : acc,
+    0 as any
+  );
+
   return (
     <div
       style={{
@@ -99,6 +105,17 @@ export default function Fighter() {
             {new Array(parseInt(fighter?.['potions used'])).fill('🧪')}
           </h3>
         )}
+        {fighter.kills && (
+          <h2>
+            Kills: {''}
+            {new Array(fighter?.kills).fill('☠️')}
+          </h2>
+        )}
+
+        <h2>
+          Streak: {''}
+          {consecutiveWins}
+        </h2>
       </div>
 
       <div key={uuidv4()} style={{ display: 'flex', gap: 12 }}>

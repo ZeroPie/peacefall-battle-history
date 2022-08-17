@@ -25,6 +25,7 @@ export type FighterRespT = {
   attributes: ApiAttrT[];
   chronicle: ChronicleEntryT[];
   context_chronicles?: ContextChroniclesT;
+  kills?: number;
 };
 
 export type ApiAttrT = {
@@ -80,6 +81,7 @@ export type FighterT = {
   image: string;
   name: string;
   hp?: number;
+  kills?: number;
   level?: number;
   peace?: string;
   character?:
