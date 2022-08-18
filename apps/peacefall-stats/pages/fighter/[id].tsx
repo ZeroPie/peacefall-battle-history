@@ -34,8 +34,6 @@ export default function Fighter() {
   let consecutiveWins = 0;
 
   for (let i = 0; i < fighter.fights.length; i++) {
-    console.log('consecutive wins', consecutiveWins);
-    console.log('max consecutive wins', maxConsecutiveWins);
     if (fighter.fights[i].victor === fighter.id) {
       consecutiveWins++;
       maxConsecutiveWins = consecutiveWins;
