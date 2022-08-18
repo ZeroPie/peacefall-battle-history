@@ -90,7 +90,7 @@ export const formatFighterResponse = ({
     ),
   ].sort(sortByTournamentLast),
   kills: createFightsArray({ fighterId: id })({ chronicle }).filter(
-    ({ fatal }) => fatal === true
+    ({ fatal, victor }) => fatal === true && victor === id
   ).length,
 });
 

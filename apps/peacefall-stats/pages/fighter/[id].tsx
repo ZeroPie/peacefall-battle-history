@@ -50,12 +50,8 @@ export default function Fighter() {
 
   const consecutiveKills = fighter.fights.reduce(
     (acc, curr, i) =>
-      curr.victor === fighter.id &&
-      curr.fatal === true &&
-      fighter?.fights[i - 1]?.fatal === true
-        ? acc + 1
-        : acc,
-    1
+      curr.victor === fighter.id && curr.fatal === true ? acc + 1 : acc,
+    0
   );
 
   return (
@@ -130,7 +126,7 @@ export default function Fighter() {
             {new Array(parseInt(fighter?.['potions used'])).fill('🧪')}
           </h3>
         )}
-        {fighter.kills && (
+        {!!fighter.kills && (
           <div
             style={{
               display: 'flex',
