@@ -31,30 +31,19 @@ export default function Fighter() {
 
   //TODO: clean this mess up
   let maxConsecutiveWins = 0;
+  let consecutiveWins = 0;
 
-  const consecutiveW = fighter.fights.reduce((acc, curr, i, arr) => {
-    let consecutiveWins = 0;
-    if (curr.victor === fighter.id) {
-      return acc + 1;
+  for (let i = 0; i < fighter.fights.length; i++) {
+    if (fighter.fights[i].victor === fighter.id) {
+      consecutiveWins++;
     }
-    // found a loss
-    if (curr.victor !== fighter.id) {
+    if (fighter.fights[i].victor !== fighter.id) {
       if (consecutiveWins > maxConsecutiveWins) {
-        // save the current number of maxWins
-        maxConsecutiveWins = acc;
-        // reset the consecutive wins
-        acc = 0;
-        maxConsecutiveWins = consecutiveW;
-        consecutiveWins = 0;
-      } else {
-        maxConsecutiveWins = acc;
-        return acc;
+        maxConsecutiveWins = consecutiveWins;
       }
-      return acc;
-    } else {
-      return acc;
+      consecutiveWins = 0;
     }
-  }, 0);
+  }
 
   const consecutiveKills = fighter.fights.reduce(
     (acc, curr, i) =>
