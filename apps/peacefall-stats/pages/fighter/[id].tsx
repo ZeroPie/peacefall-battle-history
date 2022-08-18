@@ -29,13 +29,32 @@ export default function Fighter() {
   if (error) return <div>{error?.message}</div>;
   if (!fighter) return <div>Loading...</div>;
 
-  const consecutiveWins = fighter.fights.reduce(
-    (acc, curr, i) =>
-      curr.victor === fighter.id && fighter.fights[i - 1]?.victor === fighter.id
-        ? acc + 1
-        : acc,
-    1
-  );
+  //TODO: clean this mess up
+  let maxConsecutiveWins = 0;
+
+  const consecutiveW = fighter.fights.reduce((acc, curr, i, arr) => {
+    let consecutiveWins = 0;
+    if (curr.victor === fighter.id) {
+      return acc + 1;
+    }
+    // found a loss
+    if (curr.victor !== fighter.id) {
+      if (consecutiveWins > maxConsecutiveWins) {
+        // save the current number of maxWins
+        maxConsecutiveWins = acc;
+        // reset the consecutive wins
+        acc = 0;
+        maxConsecutiveWins = consecutiveW;
+        consecutiveWins = 0;
+      } else {
+        maxConsecutiveWins = acc;
+        return acc;
+      }
+      return acc;
+    } else {
+      return acc;
+    }
+  }, 0);
 
   const consecutiveKills = fighter.fights.reduce(
     (acc, curr, i) =>
@@ -145,9 +164,9 @@ export default function Fighter() {
           }}
         >
           <h2 style={{ display: 'flex', alignItems: 'center' }}>
-            Win Streak: {consecutiveWins}
+            Win Streak: {maxConsecutiveWins}
           </h2>
-          <h2 style={{ color: 'red' }}>{winningStreaks[consecutiveWins]}</h2>
+          <h2 style={{ color: 'red' }}>{winningStreaks[maxConsecutiveWins]}</h2>
         </div>
       </div>
 
