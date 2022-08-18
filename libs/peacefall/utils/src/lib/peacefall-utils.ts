@@ -94,4 +94,29 @@ export const formatFighterResponse = ({
   ).length,
 });
 
+export const killingStreaks = {
+  0: '',
+  1: '',
+  '': '',
+  2: 'Double Kill',
+  3: 'Multi Kill',
+  4: 'Mega Kill',
+  5: 'Ultra Kill',
+  6: 'Monster Kill',
+};
+
+export const winningStreaks = {
+  0: '',
+  '': '',
+  5: 'Killing Spree',
+  6: 'Rampage',
+  7: 'Dominating',
+  8: 'Unstoppable',
+  9: 'Godlike',
+  10: 'Wicked Sick',
+  11: 'Wicked Sick',
+  12: 'Wicked Sick',
+  13: 'Wicked Sick',
+  14: 'Wicked Sick',
+};
 export { formatFighterResponse as default };

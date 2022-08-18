@@ -3,14 +3,16 @@ import useSWR from 'swr';
 import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
-import { formatFighterResponse } from '@peacefall-stats/peacefall/utils';
+import {
+  formatFighterResponse,
+  killingStreaks,
+  winningStreaks,
+} from '@peacefall-stats/peacefall/utils';
 
 const fetcher = async (url = '') => {
   const res = await fetch(url);
   const data = await res.json();
-  console.log('data', data);
   const fighter = formatFighterResponse(data);
-  console.log('fighter', fighter);
   if (!res.ok) {
     throw { message: res.statusText };
   }
@@ -27,10 +29,22 @@ export default function Fighter() {
   if (error) return <div>{error?.message}</div>;
   if (!fighter) return <div>Loading...</div>;
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const consecutiveWins = fighter.fights.reduce(
-    () => (acc, curr) => curr.victor === fighter.id ? (acc += 1) : acc,
-    0 as any
+    (acc, curr, i) =>
+      curr.victor === fighter.id && fighter.fights[i - 1]?.victor === fighter.id
+        ? acc + 1
+        : acc,
+    1
+  );
+
+  const consecutiveKills = fighter.fights.reduce(
+    (acc, curr, i) =>
+      curr.victor === fighter.id &&
+      curr.fatal === true &&
+      fighter?.fights[i - 1]?.fatal === true
+        ? acc + 1
+        : acc,
+    1
   );
 
   return (
@@ -106,16 +120,35 @@ export default function Fighter() {
           </h3>
         )}
         {fighter.kills && (
-          <h2>
-            Kills: {''}
-            {new Array(fighter?.kills).fill('☠️')}
-          </h2>
+          <div
+            style={{
+              display: 'flex',
+              marginTop: 8,
+              marginBottom: 16,
+              justifyContent: 'space-between',
+            }}
+          >
+            <h2 style={{ display: 'flex', alignItems: 'center' }}>
+              Kills: {new Array(fighter?.kills).fill('☠️')}
+            </h2>
+            <h2 style={{ color: 'red' }}>
+              {` ${killingStreaks[consecutiveKills]}`}
+            </h2>
+          </div>
         )}
-
-        <h2>
-          Streak: {''}
-          {consecutiveWins}
-        </h2>
+        <div
+          style={{
+            display: 'flex',
+            marginTop: 8,
+            marginBottom: 16,
+            justifyContent: 'space-between',
+          }}
+        >
+          <h2 style={{ display: 'flex', alignItems: 'center' }}>
+            Win Streak: {consecutiveWins}
+          </h2>
+          <h2 style={{ color: 'red' }}>{winningStreaks[consecutiveWins]}</h2>
+        </div>
       </div>
 
       <div key={uuidv4()} style={{ display: 'flex', gap: 12 }}>
